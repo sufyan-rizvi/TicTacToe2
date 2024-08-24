@@ -22,7 +22,7 @@ namespace TicTacToe.Models
             _resultAnalyzer = new ResultAnalyzer(_board, ResultType.PROGRESS);
         }
         public void RunGame()
-        {            
+        {
             analyseResult = _resultAnalyzer.GetResult();
             while (analyseResult != ResultType.WIN && analyseResult != ResultType.DRAW)
             {
@@ -56,13 +56,22 @@ namespace TicTacToe.Models
 
         public static void DisplayResult()
         {
-            Console.WriteLine(_board.DisplayGrid() + "\n");
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"{currentPlayer.Name} has won!:)");
-            currentPlayer = (currentPlayer == Players[0]) ? Players[1] : Players[0];
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine($"{currentPlayer.Name} you lose! :(");
-            Console.ResetColor();
+            if (analyseResult == ResultType.DRAW)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("\nNo Winners! It's a Draw!\n");
+                Console.ResetColor();
+            }
+            else
+            {
+                Console.WriteLine(_board.DisplayGrid() + "\n");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"{currentPlayer.Name} has won!:)");
+                currentPlayer = (currentPlayer == Players[0]) ? Players[1] : Players[0];
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"{currentPlayer.Name} you lose! :(");
+                Console.ResetColor();
+            }
         }
     }
 }

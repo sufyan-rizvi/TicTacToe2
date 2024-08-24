@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TicTacToe.Exceptions;
 
 namespace TicTacToe.Models
 {
@@ -36,6 +37,8 @@ namespace TicTacToe.Models
 
         public void SetCellMark(int location, MarkType mark)
         {
+            if (location > cells.Length || location < 0)
+                throw new InvalidCellLocationError("The location that you entered is invalid! Location should be between 0 - 8 !");
             cells[location].SetMark(mark);
             
         }
